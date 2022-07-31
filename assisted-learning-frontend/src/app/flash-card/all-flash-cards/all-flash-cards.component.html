@@ -1,0 +1,86 @@
+<div class="col-12">
+    <div class="card">
+        <div class="card-header">
+            <div class="row no-gutters">
+                <div class="col-4 text-left">
+                    <a (click)="getPreviousFlashcards()" class="btn btn-lg" [ngClass]="{'btn-success': previousPage,
+                                                                                        'btn-secondary': !previousPage }">
+                        <i class="ft-chevron-left"></i>Previous
+                    </a>
+                </div>
+                <div class="col-4 text-center">
+                    <h4 class="card-title">
+                        All Flashcards
+                    </h4>
+                </div>
+                <div class="col-4 text-right">
+                    <a (click)="getNextFlashcards()" class="btn btn-lg" [ngClass]="{'btn-success': nextPage,
+                                                                                    'btn-secondary': !nextPage }">
+                        Next<i class="ft-chevron-right"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="card-content">
+            <div class="card-body">
+
+                <div class="row text-center">
+
+                    <!--BEGIN KARTEIKARTE-->
+
+                    <div *ngFor="let flashcard of fcsd.flashcards" class="col-12 col-sm-6 col-md-4 col-lg-3">
+                        <div class="card bg-{{flashcard.bootstrap_color}} white" style="min-height: 350px !important;">
+
+                            <div class="card-content">
+
+                                <div class="card-header">
+                                    <div class="card-title text-center">
+                                        <a [routerLink]="[flashcard.answer_url, flashcard.object_id, 'answers', 'new']"
+                                           [queryParams]="{next: '/flashcards/flashcards'}" class="text-white crop-text">
+                                            {{ flashcard.question }}
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mt-auto">
+                                <div class="row ">
+                                    <div class="col-12" style="padding: 1em">
+                                        <a [routerLink]="[flashcard.answer_url, flashcard.object_id, 'answers', 'new']"
+                                           [queryParams]="{next: '/flashcards/flashcards'}" class="font-medium-3 btn text-white btn-dark btn-sm">
+                                            Start Task &nbsp;
+                                            <i class="ft-corner-down-right">
+                                            </i>
+                                        </a>
+                                        <br><br>
+                                        <p>
+                                            <b>Type:</b> {{ flashcard.type }}
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row text-right">
+                                    <div class="col-12" style="padding-bottom: 1.2em; padding-right: 2em">
+                                        <a class="font-medium-2 text-white" href="{{flashcard.edit_url}}">
+                                            <i class="ft-edit" style="font-size: 2rem !important;"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div *ngIf="fcsd.flashcards.length == 0" class="col-md-8 offset-md-2 white text-center">No entry found</div>
+                    <!--END KARTEIKARTE-->
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-12 text-right" style="padding-bottom: 1.5em; padding-right: 2em">
+            <a class="btn btn-outline-info btn-lg" [routerLink]="['/dashboard']">Back to Dashboard</a>
+        </div>
+
+
+    </div>
+</div>
